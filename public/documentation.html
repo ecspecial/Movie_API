@@ -8,7 +8,104 @@
       </head>
       <body>
         <h1>Movie_API Documentation page</h1>
-        <p>This API is inentended to listen for request and response with documentation page if present, else return index page.</p>
+        <p>This API is inentended to listen for requests and do the following:</p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Business logic</th>
+                  <th>Endpoint URL</th>
+                  <th>Method type</th>
+                  <th>Query parameters</th>
+                  <th>Request body data format</th>
+                  <th>Response body data format</th>
+                </tr>
+              </thead>
+              
+              <tbody>
+              <tr>
+                <td>Return a list of ALL movies to the user</td>
+                <td>/movies</td>
+                <td>GET</td>
+                <td>-</td>
+                <td>-</td>
+                <td>JSON objects containing all movies</td>
+              </tr>
+
+              <tr>
+                <td>Return movie information by title</td>
+                <td>/movies/:title</td>
+                <td>GET</td>
+                <td>:title</td>
+                <td>-</td>
+                <td>JSON object with data on single movie</td>
+              </tr>
+              
+              <tr>
+                <td>Return information about movie genre</td>
+                <td>/movies/genre/:genreName</td>
+                <td>GET</td>
+                <td>:genreName</td>
+                <td>-</td>
+                <td>JSON object cintaining data about genre</td>
+              </tr>
+
+              <tr>
+                <td>Return data about a director by name</td>
+                <td>/movies/directors/:directorName</td>
+                <td>GET</td>
+                <td>:directorName</td>
+                <td>-</td>
+                <td>JSON object with data about director</td>
+              </tr>
+
+              <tr>
+                <td>Allow new users to register</td>
+                <td>/users</td>
+                <td>POST </td>
+                <td>-</td>
+                <td>JSON object holding user data, format: { "name" : "Summer", "favorite movie" : [] }</td>
+                <td>JSON object holding added user data , format: { "name" : "Summer", "favorite movie" : [] } with ID</td>
+              </tr>
+
+              <tr>
+                <td>Allow users to update their user info (username)</td>
+                <td>/users/:id</td>
+                <td>PUT</td>
+                <td>:id</td>
+                <td>-</td>
+                <td>JSON object holding updated user data</td>
+              </tr>
+
+              <tr>
+                <td>Allow users to add a movie to favorites</td>
+                <td>POST</td>
+                <td>/users/:id/:movieTitle</td>
+                <td>:movieTitle</td>
+                <td>-</td>
+                <td>Message and status indicating whether movie was added</td>
+              </tr>
+
+              <tr>
+                <td>Allow users to remove a movie from favorites</td>
+                <td>DELETE</td>
+                <td>/users/:id/:movieTitle</td>
+                <td>:movieTitle</td>
+                <td>-</td>
+                <td>Message and status indicating whether movie was deleted</td>
+              </tr>
+
+              <tr>
+                <td>Allow existing users to deregister</td>
+                <td>DELETE</td>
+                <td>/users/:id</td>
+                <td>:id</td>
+                <td>-</td>
+                <td>Message and status indicating whether user was deleted</td>
+              </tr>
+            </tbody>
+            </table>
+
         <script type="module" src="index.js"></script>
       </body>
 </html>
