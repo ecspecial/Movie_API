@@ -18,7 +18,9 @@
                   <th>Method type</th>
                   <th>Query parameters</th>
                   <th>Request body data format</th>
+                  <th>Request example</th>
                   <th>Response body data format</th>
+                  <th>Response example</th>
                 </tr>
               </thead>
               
@@ -29,7 +31,34 @@
                 <td>GET</td>
                 <td>-</td>
                 <td>-</td>
+                <td>http://localhost:8080/movies</td>
                 <td>JSON objects containing all movies</td>
+                <td>
+                  <pre>
+                    <code>
+                      [
+                        {
+                            "Genre": {
+                                "Name": "Thriller",
+                                "Description": "Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience."
+                            },
+                            "Director": {
+                                "Name": "Jonathan Demme",
+                                "Bio": "Robert Jonathan Demme was an American director, producer, and screenwriter.",
+                                "Birth": "1944",
+                                "Death": "2017"
+                            },
+                            "_id": "639f20f21b100a83dd6efec5",
+                            "Title": "Silence of the Lambs",
+                            "Description": "A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer.",
+                            "ImagePath": "https://m.media-amazon.com/images/M/MV5BNjNhZTk0ZmEtNjJhMi00YzFlLWE1MmEtYzM1M2ZmMGMwMTU4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg",
+                            "Featured": true
+                        },
+                        ...
+                      ]
+                    </code>
+                  </pre>
+                </td>
               </tr>
 
               <tr>
@@ -38,7 +67,31 @@
                 <td>GET</td>
                 <td>:title</td>
                 <td>-</td>
+                <td>http://localhost:8080/movies/The%20Godfather</td>
                 <td>JSON object with data on single movie</td>
+                <td>
+                  <pre>
+                    <code>
+                      {
+                        "Genre": {
+                            "Name": "Crime",
+                            "Description": "Crime film is a genre that revolves around the action of a criminal mastermind."
+                        },
+                        "Director": {
+                            "Name": "Francis Ford Coppola",
+                            "Bio": "Coppola's reputation as a filmmaker was cemented with the release of The Godfather (1972), which revolutionized the gangster genre[6] of filmmaking, receiving strong commercial and critical reception.",
+                            "Birth": "1939",
+                            "Death": null
+                        },
+                        "_id": "639f3a8f1b100a83dd6efec7",
+                        "Title": "The Godfather",
+                        "Description": "Movie plot is centered around the aging patriarch of an organized crime dynasty in postwar New York City transfers control of his clandestine empire to his reluctant youngest son.",
+                        "ImagePath": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg",
+                        "Featured": true
+                      }
+                    </code>
+                  </pre>
+                </td>
               </tr>
               
               <tr>
@@ -47,16 +100,37 @@
                 <td>GET</td>
                 <td>:genreName</td>
                 <td>-</td>
-                <td>JSON object cintaining data about genre</td>
+                <td>http://localhost:8080/movies/genre/Adventure</td>
+                <td>JSON object containing data about genre</td>
+                <td>
+                  <pre>
+                    <code>
+                      "Adventure Films are exciting stories, with new experiences or exotic locales."
+                    </code>
+                  </pre>
+                </td>
               </tr>
 
               <tr>
-                <td>Return data about a director by name</td>
+                <td>Return data about director by name</td>
                 <td>/movies/directors/:directorName</td>
                 <td>GET</td>
                 <td>:directorName</td>
                 <td>-</td>
+                <td>http://localhost:8080/movies/directors/Sergio%20Leone</td>
                 <td>JSON object with data about director</td>
+                <td>
+                  <pre>
+                    <code>
+                      {
+                        "Name": "Sergio Leone",
+                        "Bio": "Leone entered films in his late teens, working as an assistant director to both Italian directors and U.S. directors working in Italy (usually making Biblical and Roman epics, much in vogue at the time).",
+                        "Birth": "1987",
+                        "Death": null
+                      }
+                    </code>
+                  </pre>
+                </td>
               </tr>
 
               <tr>
@@ -64,44 +138,131 @@
                 <td>/users</td>
                 <td>POST </td>
                 <td>-</td>
-                <td>JSON object holding user data, format: { "name" : "Summer", "favorite movie" : [] }</td>
-                <td>JSON object holding added user data , format: { "name" : "Summer", "favorite movie" : [] } with ID</td>
+                <td>JSON object holding user data</td>
+                <td>
+                  <pre>
+                    <code>
+                      {
+                        "Username": "username7",
+                        "Password": "password7",
+                        "Email": "username7@gmail.com",
+                        "Birthday": "02/23/1989",
+                        "FavoriteMovies": []
+                      }
+                    </code>
+                  </pre>
+                </td>
+                <td>JSON object holding added user data with ID</td>
+                <td>
+                  <pre>
+                    <code>
+                      {
+                        _id: ObjectId("63a3795b08e6b41bbc47462a"),
+                        Username: 'username7',
+                        Password: 'password7',
+                        Email: 'username7@gmail.com',
+                        Birthday: ISODate("1989-02-22T21:00:00.000Z"),
+                        FavoriteMovies: []
+                      }
+                    </code>
+                  </pre>
+                </td>
               </tr>
 
               <tr>
-                <td>Allow users to update their user info (username)</td>
-                <td>/users/:id</td>
+                <td>Allow users to update their user info</td>
+                <td>/users/:username</td>
                 <td>PUT</td>
-                <td>:id</td>
-                <td>-</td>
+                <td>:username</td>
+                <td>JSON object holding user data</td>
+                <td>
+                  <pre>
+                    <code>
+                      {
+                        "Username": "username7",
+                        "Password": "newpassword7",
+                        "Email": "username7@gmail.com",
+                        "Birthday": "02/23/1989"
+                      }
+                    </code>
+                  </pre>
+                </td>
                 <td>JSON object holding updated user data</td>
+                <td>
+                  <pre>
+                    <code>
+                      {
+                        "_id": "639f40dc1b100a83dd6efed0",
+                        "Username": "username7",
+                        "Password": "newpassword7",
+                        "Email": "username7@gmail.com",
+                        "Birthday": "1989-02-22T21:00:00.000Z",
+                        "FavoriteMovies": []
+                      }
+                    </code>
+                  </pre>
+                </td>
               </tr>
 
               <tr>
                 <td>Allow users to add a movie to favorites</td>
                 <td>POST</td>
-                <td>/users/:id/:movieTitle</td>
-                <td>:movieTitle</td>
+                <td>/users/:username/movies/:movieID</td>
+                <td>:movieID</td>
                 <td>-</td>
-                <td>Message and status indicating whether movie was added</td>
+                <td></td>
+                <td>User JSON containing favorite movie ID</td>
+                <td>
+                  <pre>
+                    <code>
+                      {
+                        "_id": "63a3780f08e6b41bbc47461f",
+                        "Username": "username5",
+                        "Password": "password5",
+                        "Email": "username5@gmail.com",
+                        "Birthday": "1989-02-27T21:00:00.000Z",
+                        "FavoriteMovies": [
+                            "639f3a8f1b100a83dd6efec7"
+                        ]
+                      }
+                    </code>
+                  </pre>
+                </td>
               </tr>
 
               <tr>
                 <td>Allow users to remove a movie from favorites</td>
                 <td>DELETE</td>
-                <td>/users/:id/:movieTitle</td>
-                <td>:movieTitle</td>
+                <td>/users/:username/movies/:movieID</td>
+                <td>:movieID</td>
                 <td>-</td>
-                <td>Message and status indicating whether movie was deleted</td>
+                <td>http://localhost:8080/users/username5/movies/639f3a8f1b100a83dd6efec7</td>
+                <td>User JSON excluding favorite movie ID</td>
+                <td>
+                  <pre>
+                    <code>
+                      {
+                        "_id": "63a3780f08e6b41bbc47461f",
+                        "Username": "username5",
+                        "Password": "password5",
+                        "Email": "username5@gmail.com",
+                        "Birthday": "1989-02-27T21:00:00.000Z",
+                        "FavoriteMovies": [],
+                      }
+                    </code>
+                  </pre>
+                </td>
               </tr>
 
               <tr>
                 <td>Allow existing users to deregister</td>
                 <td>DELETE</td>
-                <td>/users/:id</td>
-                <td>:id</td>
+                <td>/users/:username</td>
+                <td>:username</td>
                 <td>-</td>
-                <td>Message and status indicating whether user was deleted</td>
+                <td>http://localhost:8080/users/username7</td>
+                <td>Message indicating whether user was deleted</td>
+                <td>username7 was deleted.</td>
               </tr>
             </tbody>
             </table>

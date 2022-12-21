@@ -94,7 +94,7 @@ app.post('/users', (req, res) => {
         });
 });
 
-// Update username
+// Update user info
 app.put('/users/:username', (req, res) => {
     Users.findOne({ Username: req.params.username })
     .then((user) => {
@@ -110,7 +110,7 @@ app.put('/users/:username', (req, res) => {
             }
         },
         { new: true },
-        (err, updatedUser) => {
+        (error, updatedUser) => {
             if (error) {
                 console.log(error);
                 res.status(500).send('Error: ' + error);
