@@ -12,6 +12,7 @@ const PORT = 8080;
 const accesLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Write logs to log.txt using morgan package
 app.use(morgan('combined', {stream: accesLogStream}));
