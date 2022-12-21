@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 
 // Define schema for movie document in mongoDB
 let movieSchema = mongoose.Schema({
-    Title: {Type: String, required: true},
-    Description: {Type: String, required: true},
+    Title: {type: String, required: true},
+    Description: {type: String, required: true},
     Genre: {
         Name: String,
         Description: String
@@ -21,16 +21,16 @@ let movieSchema = mongoose.Schema({
 
 // Define schema for user document in mongoDB
 let userSchema = ({
-    Username: {Type: String, required: true},
-    Password: {Type: String, required: true},
-    Email: {Type: String, required: true},
+    Username: {type: String, required: true},
+    Password: {type: String, required: true},
+    Email: {type: String, required: true},
     Birthday: Date, 
-    FavoriteMovies: [{Type: mongoose.Schema.Types.ObjectId, ref: 'Movie'}]
+    FavoriteMovies: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movie'}]
 });
 
 // Create model based on schema
 let Movie = mongoose.model('Movie', movieSchema);
-let User = mongoose.model('User', movieSchema);
+let User = mongoose.model('User', userSchema);
 
 // Export model
 module.exports.Movie = Movie;
