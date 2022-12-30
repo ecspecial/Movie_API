@@ -1,5 +1,3 @@
-const e = require('express');
-
 const express = require('express'),
     app = express(),
     morgan = require('morgan'),
