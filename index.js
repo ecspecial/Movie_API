@@ -6,7 +6,8 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     path = require('path'),
     mongoose = require('mongoose'),
-    Models = require('./models.js');
+    Models = require('./models.js'),
+    bcrypt = require('bcrypt');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -17,6 +18,23 @@ const accesLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {fl
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Use Cross-Origin Resource Sharing on specific domains
+// const cors = require('cors');
+// app.use(cors());
+
+// let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     if(!origin) return callback(null, true);
+//     if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+//       let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+//       return callback(new Error(message ), false);
+//     }
+//     return callback(null, true);
+//   }
+// }));
 
 let auth = require('./auth.js')(app);
 const passport = require('passport');
@@ -71,6 +89,7 @@ app.get('/users/:username', passport.authenticate('jwt', { session: false }), (r
 
 // Add new user
 app.post('/users', (req, res) => {
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ Username: req.body.Username })
     .then((user) => {
         if (user) {
@@ -78,7 +97,7 @@ app.post('/users', (req, res) => {
         } else {
             Users.create({
                 Username: req.body.Username,
-                Password: req.body.Password,
+                Password: hashedPassword,
                 Email: req.body.Email,
                 Birthday: req.body.Birthday,
                 FavoriteMovies: req.body.FavoriteMovies
