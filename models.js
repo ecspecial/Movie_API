@@ -1,5 +1,6 @@
 // Require mongoose to use database with api in index.js
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 // Define schema for movie document in mongoDB
 let movieSchema = mongoose.Schema({
@@ -20,7 +21,7 @@ let movieSchema = mongoose.Schema({
 });
 
 // Define schema for user document in mongoDB
-let userSchema = ({
+let userSchema = mongoose.Schema({
     Username: {type: String, required: true},
     Password: {type: String, required: true},
     Email: {type: String, required: true},
@@ -29,12 +30,12 @@ let userSchema = ({
 });
 
 userSchema.statics.hashPassword = (password) => {
-    return bycrypt.hashSync(password, 10)
+    return bcrypt.hashSync(password, 10);
 };
 
 userSchema.methods.validatePassword = (password) => {
-    return bycrypt.compareSync(password, this.Password)
-}
+    return bcrypt.compareSync(password, this.Password);
+};
 
 // Create model based on schema
 let Movie = mongoose.model('Movie', movieSchema);
