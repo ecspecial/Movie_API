@@ -131,7 +131,7 @@ app.post('/users', [
 });
 
 // Update user info
-app.put('/users/:username', [
+app.put('/users/:Username', [
     check('Username', 'Username is required').isLength({min: 5}),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
@@ -146,7 +146,7 @@ app.put('/users/:username', [
     }
 
     let hashedPassword = Users.hashPassword(req.body.Password);
-    Users.findOne({ Username: req.params.username })
+    Users.findOne({ Username: req.params.Username })
     .then((user) => {
         if(!user) {
             res.status(400).send('User not found.')
