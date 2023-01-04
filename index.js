@@ -7,7 +7,8 @@ const express = require('express'),
     path = require('path'),
     mongoose = require('mongoose'),
     Models = require('./models.js'),
-    bcrypt = require('bcrypt');
+    bcrypt = require('bcrypt'),
+    { check, validationResult } = require('express-validator');
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -20,8 +21,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Use Cross-Origin Resource Sharing on specific domains
-// const cors = require('cors');
-// app.use(cors());
+const cors = require('cors');
+app.use(cors());
 
 // let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 
@@ -88,7 +89,20 @@ app.get('/users/:username', passport.authenticate('jwt', { session: false }), (r
 
 
 // Add new user
-app.post('/users', (req, res) => {
+app.post('/users', [
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+
+    // Check for validation errors
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+
     let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ Username: req.body.Username })
     .then((user) => {
@@ -116,7 +130,21 @@ app.post('/users', (req, res) => {
 });
 
 // Update user info
-app.put('/users/:username', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.put('/users/:username', [
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()
+], passport.authenticate('jwt', { session: false }), (req, res) => {
+    
+    // Check for validation errors
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+    }
+
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ Username: req.params.username })
     .then((user) => {
         if(!user) {
@@ -124,7 +152,7 @@ app.put('/users/:username', passport.authenticate('jwt', { session: false }), (r
         } else {
             Users.findOneAndUpdate(user, {$set: {
                 Username: req.body.Username,
-                Password: req.body.Password,
+                Password: hashedPassword,
                 Email: req.body.Email,
                 Birthday: req.body.Birthday,
                 FavoriteMovies: req.body.FavoriteMovies
