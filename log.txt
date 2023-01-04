@@ -391,3 +391,4 @@
 ::ffff:127.0.0.1 - - [30/Dec/2022:18:21:55 +0000] "GET /documentation HTTP/1.1" 200 11273 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [30/Dec/2022:18:21:55 +0000] "GET /style.css HTTP/1.1" 404 148 "http://127.0.0.1:8080/documentation" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [30/Dec/2022:18:21:55 +0000] "GET /index.js HTTP/1.1" 404 147 "http://127.0.0.1:8080/documentation" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
+::1 - - [04/Jan/2023:14:50:40 +0000] "POST /users/ HTTP/1.1" 201 228 "-" "PostmanRuntime/7.30.0"
