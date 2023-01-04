@@ -12,7 +12,7 @@ const express = require('express'),
 
 const Movies = Models.Movie;
 const Users = Models.User;
-const PORT = 8080;
+const port = process.env.PORT || 8080;
 
 // Define file to write logs to
 const accesLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
@@ -287,6 +287,6 @@ app.use((err, req, res, next) => {
 });
 
 // Listen on port
-app.listen(PORT, () => {
-    console.log('App is listening on port 8080');
+app.listen(port, '0.0.0.0',() => {
+    console.log('Listening on Port ' + port);
 });
