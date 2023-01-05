@@ -91,7 +91,7 @@ app.get('/users/:username', passport.authenticate('jwt', { session: false }), (r
 
 // Add new user
 app.post('/users', [
-    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username is required (minimum 5 characters).').isLength({min: 5}),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()
@@ -132,7 +132,7 @@ app.post('/users', [
 
 // Update user info
 app.put('/users/:Username', [
-    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username is required (minimum 5 characters).').isLength({min: 5}),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()
