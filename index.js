@@ -190,6 +190,17 @@ app.delete('/users/:username', passport.authenticate('jwt', { session: false }),
         });
 });
 
+// Return list of movies upon a request
+app.get('/movies', (req, res) => {
+    Movies.find()
+    .then((movies) => {
+        res.status(201).json(movies);
+    })
+    .catch((error) => {
+        res.status(500).send('Error ' + error);
+    })
+});
+
 // Add movies to the favorites
 app.post('/users/:username/movies/:movieID', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.username }, {
@@ -220,17 +231,6 @@ app.delete('/users/:username/movies/:movieID', passport.authenticate('jwt', { se
             res.json(updatedUser);
         }
     });
-});
-
-// Return list of movies upon a request
-app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
-    Movies.find()
-    .then((movies) => {
-        res.status(201).json(movies);
-    })
-    .catch((error) => {
-        res.status(500).send('Error ' + error);
-    })
 });
 
 // Retrurn data about single movie by title
