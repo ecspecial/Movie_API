@@ -132,10 +132,10 @@ app.post('/users', [
 
 // Update user info
 app.put('/users/:Username', [
-    check('Username', 'Username is required (minimum 5 characters).').isLength({min: 5}),
-    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('Password', 'Password is required').isLength({min: 8}),
-    check('Email', 'Email does not appear to be valid').isEmail()
+    check('Username', 'Username is required.').not().isEmpty(),
+    check('Username', 'Username can only contain numbers or letters.').isAlphanumeric(),
+    check('Password', 'Password must be at least 8 characters long.').isLength({min:8}),
+    check('Email', 'Email doesn\'t appear to be valid.').isEmail()
 ], passport.authenticate('jwt', { session: false }), (req, res) => {
     
     // Check for validation errors
