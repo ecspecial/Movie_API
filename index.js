@@ -134,7 +134,7 @@ app.post('/users', [
 app.put('/users/:Username', [
     check('Username', 'Username is required.').not().isEmpty(),
     check('Username', 'Username can only contain numbers or letters.').isAlphanumeric(),
-    check('Password', 'Password must be at least 8 characters long.').isLength({min:8}),
+    check('Password', 'Password must be at least 8 characters long.').optional().isLength({min:8}),
     check('Email', 'Email doesn\'t appear to be valid.').isEmail()
 ], passport.authenticate('jwt', { session: false }), (req, res) => {
     
@@ -145,7 +145,7 @@ app.put('/users/:Username', [
         return res.status(422).json({ errors: errors.array() });
     }
 
-    let hashedPassword = Users.hashPassword(req.body.Password);
+    let hashedPassword = req.body.Password ? Users.hashPassword(req.body.Password) : Users.findOne({ Username: req.params.Username }).Password;
     Users.findOne({ Username: req.params.Username })
     .then((user) => {
         if(!user) {
