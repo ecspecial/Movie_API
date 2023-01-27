@@ -151,7 +151,7 @@ app.put('/users/:Username', [
         if(!user) {
             res.status(400).send('User not found.')
         } else {
-            Users.findOneAndUpdate(user, {$set: {
+            Users.findOneAndUpdate({ Username: req.params.Username }, {$set: {
                 Username: req.body.Username,
                 Password: hashedPassword,
                 Email: req.body.Email,
