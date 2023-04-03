@@ -1,3 +1,0 @@
-127.0.0.1 - - [04/Jan/2023:18:14:04 +0000] "GET /style.css HTTP/1.1" 404 148 "http://127.0.0.1:8080/documentation" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
-127.0.0.1 - - [04/Jan/2023:18:14:04 +0000] "GET /index.js HTTP/1.1" 404 147 "http://127.0.0.1:8080/documentation" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
-127.0.0.1 - - [04/Jan/2023:18:14:05 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://127.0.0.1:8080/documentation" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
